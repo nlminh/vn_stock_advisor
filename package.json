@@ -1,0 +1,44 @@
+{
+  "name": "vn-stock-advisor",
+  "version": "1.0.0",
+  "description": "Vietnamese Stock Advisor - AI-powered stock analysis using Next.js and TypeScript",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "^15.0.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "@types/node": "^20.14.10",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.5.4",
+    "tailwindcss": "^3.4.6",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.39",
+    "lucide-react": "^0.408.0",
+    "clsx": "^2.1.1",
+    "class-variance-authority": "^0.7.0",
+    "tailwind-merge": "^2.4.0",
+    "recharts": "^2.12.7",
+    "date-fns": "^3.6.0",
+    "axios": "^1.7.2",
+    "swr": "^2.2.5",
+    "framer-motion": "^11.3.8",
+    "react-hook-form": "^7.52.1",
+    "@hookform/resolvers": "^3.9.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "eslint": "^9.14.0",
+    "eslint-config-next": "^15.0.3",
+    "@eslint/eslintrc": "^3.1.0",
+    "@tailwindcss/typography": "^0.5.13"
+  }
+} 

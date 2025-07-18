@@ -1,159 +1,192 @@
-# VN Stock Advisor (v.0.4.1)
+# VN Stock Advisor - Phân tích cổ phiếu Việt Nam bằng AI
 
-## 🇻🇳 Tiếng Việt
+Ứng dụng web phân tích cổ phiếu Việt Nam sử dụng trí tuệ nhân tạo, được xây dựng bằng Next.js, TypeScript, và TailwindCSS.
 
-### Giới thiệu
-VN Stock Advisor là một công cụ phân tích cổ phiếu thông minh sử dụng hệ thống Multi-AI-Agent của CrewAI. 
-Công cụ cũng sử dụng trí tuệ nhân tạo được cung cấp bởi Google Gemini.
-Hệ thống cung cấp phân tích toàn diện về cổ phiếu, bao gồm tin tức, phân tích cơ bản và phân tích kỹ thuật và đưa ra khuyến nghị.
+## 🚀 Tính năng chính
 
-### Lưu ý:
-Dự án này có mục đích chính là học tập và nghiên cứu về Large Language Model, Prompt Engineering và CrewAI framework. Từ đó áp dụng vào phân tích chứng khoán một cách tự động.
-Các báo cáo phân tích được VN Stock Advisor thu thập từ những nguồn trên Internet và tổng hợp, phân tích bởi trí tuệ nhân tạo.
-Do đó, tất cả các quan điểm, luận điểm, khuyến nghị mua/bán mà VN Stock Advisor đưa ra chỉ mang tính tham khảo. 
-VN Stock Advisor không chịu trách nhiệm đối với bất kỳ khoản thua lỗ từ đầu tư nào do sử dụng các báo cáo phân tích này.
+- **Phân tích cơ bản**: Đánh giá sức khỏe tài chính, định giá và so sánh với trung bình ngành
+- **Phân tích kỹ thuật**: Phân tích xu hướng, động lượng và tín hiệu giao dịch từ biểu đồ giá
+- **Phân tích vĩ mô**: Đánh giá tác động của môi trường kinh tế và tin tức thị trường
+- **Khuyến nghị đầu tư**: Đưa ra quyết định MUA/GIỮ/BÁN dựa trên phân tích toàn diện
+- **Giao diện thân thiện**: Thiết kế hiện đại, responsive trên mọi thiết bị
 
-### Tính năng
-Sử dụng hệ thống 4 AI Agents để thực hiện những công việc sau:
-- 🔍 Tự động search google và scrape các trang web để thu thập và phân tích tin tức mới nhất về cổ phiếu
-- 📊 Tự động gọi API và RAG để lấy dữ liệu và phân tích cơ bản (P/E, P/B, ROE, EPS,...)
-- 📈 Tự động thu thập giữ liệu giá, khối lượng từ VCI hoặc TCBS, tính toán và phân tích kỹ thuật (SMA, EMA, RSI, MACD, OBV...)
-- 💡 Tổng hợp dữ liệu và đề xuất quyết định đầu tư (Mua/Bán/Giữ)
+## 🛠️ Công nghệ sử dụng
 
-### Webdemo
-- Update sau
+- **Frontend**: Next.js 14, React 18, TypeScript
+- **Styling**: TailwindCSS, Headless UI
+- **Charts**: Recharts
+- **Icons**: Lucide React
+- **Build Tool**: Webpack (Next.js built-in)
 
-### Cài đặt (nếu muốn chạy local)
+## 📋 Yêu cầu hệ thống
+
+- Node.js 18.17 trở lên
+- npm hoặc yarn
+- Trình duyệt hiện đại hỗ trợ ES2020+
+
+## 🚀 Cài đặt và chạy
+
+### 1. Clone repository
+
 ```bash
-# Cài đặt Python >= 3.10, < 3.13
-https://www.python.org/downloads/
-
-# Cài đặt uv package manager
-https://docs.astral.sh/uv/getting-started/installation/
-
-# Cài đặt crewai
-uv tool install crewai
-
-# Tham khảo hướng dẫn cài đặt crewai nếu gặp lỗi
-https://docs.crewai.com/installation
-
-# Cài đặt các dependencies
-crewai install
+git clone <repository-url>
+cd vn-stock-advisor
 ```
 
-### Cấu hình
-Tạo file `.env` với các biến môi trường sau:
-Có thể thay thế các MODEL bằng các model khác của Google hoặc thậm chí từ OpenAi, Anthropic hay local model như Ollama.
-```
-GEMINI_API_KEY=your_gemini_api_key
-GEMINI_MODEL=gemini/gemini-2.0-flash-001
-GEMINI_REASONING_MODEL=gemini/gemini-2.5-flash-preview-04-17
-SERPER_API_KEY=your_serper_api_key
-```
+### 2. Cài đặt dependencies
 
-### Sử dụng
 ```bash
-# Vào main.py, thay biến symbol bằng mã cổ phiếu muốn phân tích
-# Mặc định hiện đang để là "HPG"
-
-# Sử dụng lệnh sau để chạy chương trình
-crewai run
+npm install
+# hoặc
+yarn install
 ```
-### Yêu cầu
-- Python >= 3.10, < 3.13
-- crewai[tools] >= 0.117.0
-- google-generativeai >= 0.8.4
-- vnstock >= 3.2.4
-- python-dotenv >= 1.1.0
-- Google Gemini API key (đăng kí free từ [Google AI Studio](https://aistudio.google.com/apikey))
-- Serper.dev API key (đăng kí free từ [serper.dev](https://serper.dev/api-key))
 
-### Một số lỗi có thể gặp
-- Đôi khi agent sẽ chạy lâu hơn bình thường do giới hạn về API call mỗi phút (hiện tại là rpm đang set là 5)
-- Đôi khi server Gemini quá tải dẫn đến agent bị lỗi, thường là vào buổi tối. Có thể thử lại vào 1 thời điểm khác
-- Cũng do giới hạn của API free nên chỉ search và scrape tối đa 3 nguồn tin.
-- Do thử nghiệm prompting bằng tiếng Việt nên có khả năng Gemini vẫn chưa hiểu và tuân thủ 100% prompt
-- 1 số trang web sử dụng nhiều JavaScript hoặc chặn bot nên bị lỗi khi scrape dữ liệu (ví dụ như vietstock.vn)
+### 3. Chạy ứng dụng
 
-### Bản quyền
-MIT License
-
-## 🇺🇸 English
-
-### Introduction
-VN Stock Advisor is an intelligent stock analysis tool utilizing CrewAI's Multi-AI-Agent system.
-The tool also leverages artificial intelligence provided by Google Gemini.
-The system provides comprehensive stock analysis, including news, fundamental analysis, technical analysis, and recommendations.
-
-### Note:
-This project's main purpose is to study and research Large Language Models, Prompt Engineering, and the CrewAI framework, applying them to automated stock analysis.
-The analysis reports are collected by VN Stock Advisor from Internet sources and synthesized, analyzed by artificial intelligence.
-Therefore, all viewpoints, arguments, and buy/sell recommendations provided by VN Stock Advisor are for reference only.
-VN Stock Advisor is not responsible for any investment losses resulting from the use of these analysis reports.
-
-### Features
-Uses a system of 4 AI Agents to perform the following tasks:
-- 🔍 Automatically search Google and scrape websites to collect and analyze the latest stock news
-- 📊 Automatically call APIs and RAG to retrieve data and perform fundamental analysis of a stock (P/E, P/B, ROE, EPS,...)
-- 📈 Automatically collect price, volume data from API, calculate and perform technical analysis of a stock (SMA, EMA, RSI, MACD, OBV...)
-- 💡 Synthesize data and propose investment decisions (Buy/Sell/Hold)
-
-### Webdemo
-- To be updated later
-
-### Installation (for running locally)
 ```bash
-# Install Python >= 3.10, < 3.13
-https://www.python.org/downloads/
+# Development mode
+npm run dev
+# hoặc
+yarn dev
 
-# Install uv package manager
-https://docs.astral.sh/uv/getting-started/installation/
-
-# Install crewai
-uv tool install crewai
-
-# Refer to crewai installation guide if you encounter errors
-https://docs.crewai.com/installation
-
-# Install dependencies
-crewai install
+# Production build
+npm run build
+npm run start
 ```
 
-### Configuration
-Create a `.env` file with the following environment variables:
-You can replace the MODELs with other Google models or even from OpenAi, Anthropic, xAI, Ollama...
+### 4. Mở trình duyệt
+
+Truy cập `http://localhost:3000` để sử dụng ứng dụng.
+
+## 📁 Cấu trúc dự án
+
 ```
-GEMINI_API_KEY=your_gemini_api_key
-GEMINI_MODEL=gemini/gemini-2.0-flash-001
-GEMINI_REASONING_MODEL=gemini/gemini-2.5-flash-preview-04-17
-SERPER_API_KEY=your_serper_api_key
-FIRECRAWL_API_KEY=your_firecrawl_api_key
+src/
+├── app/                    # Next.js App Router
+│   ├── globals.css        # Global styles
+│   ├── layout.tsx         # Root layout
+│   └── page.tsx           # Home page
+├── components/            # React components
+│   ├── analysis-result.tsx
+│   ├── company-overview.tsx
+│   ├── fundamental-analysis.tsx
+│   ├── header.tsx
+│   ├── investment-decision.tsx
+│   ├── loading-spinner.tsx
+│   ├── news-analysis.tsx
+│   ├── search-form.tsx
+│   └── technical-analysis.tsx
+├── data/                  # Static data and mock data
+│   ├── industry-averages.ts
+│   └── mock-data.ts
+├── lib/                   # Utility functions and services
+│   ├── stock-service.ts
+│   └── utils.ts
+└── types/                 # TypeScript type definitions
+    └── stock.ts
 ```
 
-### Usage
+## 🎯 Cách sử dụng
+
+1. **Nhập mã cổ phiếu**: Gõ mã cổ phiếu Việt Nam (VD: FPT, HPG, VIC) vào ô tìm kiếm
+2. **Chờ phân tích**: AI sẽ thu thập và phân tích dữ liệu từ nhiều nguồn
+3. **Xem kết quả**: Báo cáo chi tiết bao gồm:
+   - Thông tin công ty và ngành
+   - Khuyến nghị đầu tư với điểm số
+   - Phân tích cơ bản với biểu đồ tài chính
+   - Phân tích kỹ thuật với các chỉ báo
+   - Phân tích tin tức và môi trường vĩ mô
+
+## 📊 Dữ liệu mẫu
+
+Ứng dụng hiện tại sử dụng dữ liệu mẫu cho mục đích demo:
+- **FPT**: Dữ liệu thực từ example response
+- **HPG**: Dữ liệu mẫu với khuyến nghị MUA
+- **Cổ phiếu khác**: Tự động tạo dữ liệu realistic dựa trên thuật toán
+
+## 🔧 Tùy chỉnh
+
+### Thêm cổ phiếu mới
+
+Chỉnh sửa file `src/data/mock-data.ts` để thêm dữ liệu cho cổ phiếu cụ thể.
+
+### Thay đổi trung bình ngành
+
+Cập nhật file `src/data/industry-averages.ts` với dữ liệu mới nhất.
+
+### Tùy chỉnh giao diện
+
+- Chỉnh sửa `src/app/globals.css` cho CSS variables
+- Cập nhật `tailwind.config.ts` cho theme tùy chỉnh
+- Thay đổi components trong `src/components/`
+
+## 🚀 Triển khai
+
+### Vercel (Khuyến nghị)
+
 ```bash
-# In main.py, replace the symbol variable with the stock code you want to analyze
-# Currently set to "HPG" by default
-
-# Use the following command to run the program
-crewai run
+npm run build
+# Deploy to Vercel
+vercel --prod
 ```
 
-### Requirements
-- Python >= 3.10, < 3.13
-- crewai[tools] >= 0.117.0
-- google-generativeai >= 0.8.4
-- vnstock >= 3.2.4
-- python-dotenv >= 1.1.0
-- Google Gemini API key (register free from [Google AI Studio](https://aistudio.google.com/apikey))
-- Serper.dev API key (register free from [serper.dev](https://serper.dev/api-key))
+### Netlify
 
-### Known Issues
-- Occasionally, the agent system may run longer than usual due to the API call limit per minute (currently set to 5 rpm). 
-- Sometimes, the Gemini server may be overloaded, resulting in agent errors; it may be advisable to try again at a later time.
-- Also, due to the limit of free API, only search and scrape maximum of 3 news sources.
-- Due to Vietnamese prompting, Gemini model may not follow 100% as instructed
-- Due to heavy JavaScript or bot blocking, some website scraping may lead to error (notably vietstock.vn)
+```bash
+npm run build
+# Upload dist folder to Netlify
+```
 
-### License
-MIT License
+### Docker
+
+```dockerfile
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --only=production
+COPY . .
+RUN npm run build
+EXPOSE 3000
+CMD ["npm", "start"]
+```
+
+## 🔮 Tính năng tương lai
+
+- [ ] Tích hợp API thực tế (VNStock, SSI, etc.)
+- [ ] Thêm biểu đồ giá real-time
+- [ ] Hệ thống cảnh báo giá
+- [ ] Portfolio tracking
+- [ ] Phân tích so sánh cổ phiếu
+- [ ] Export báo cáo PDF
+- [ ] Multi-language support
+- [ ] Dark mode
+
+## 🤝 Đóng góp
+
+1. Fork repository
+2. Tạo feature branch: `git checkout -b feature/amazing-feature`
+3. Commit changes: `git commit -m 'Add amazing feature'`
+4. Push to branch: `git push origin feature/amazing-feature`
+5. Tạo Pull Request
+
+## 📄 License
+
+Dự án này được phân phối dưới giấy phép MIT. Xem file `LICENSE` để biết thêm chi tiết.
+
+## 🙏 Ghi nhận
+
+- **vnstock**: Python library for Vietnamese stock data
+- **CrewAI**: Multi-agent AI framework inspiration
+- **Next.js**: React framework
+- **TailwindCSS**: Utility-first CSS framework
+- **Recharts**: Charts library for React
+
+## 📞 Liên hệ
+
+- **Email**: support@vnstockadvisor.com
+- **Website**: https://vnstockadvisor.com
+- **GitHub**: https://github.com/your-org/vn-stock-advisor
+
+---
+
+⚠️ **Lưu ý quan trọng**: Ứng dụng này chỉ cung cấp thông tin tham khảo, không phải lời khuyên đầu tư. Vui lòng tự nghiên cứu và cân nhắc kỹ trước khi đưa ra quyết định đầu tư.
